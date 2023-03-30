@@ -1,7 +1,6 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link class="text-4xl" to="/">Contact Us</router-link>
   </nav>
   <router-view/>
 </template>
@@ -14,16 +13,21 @@
   text-align: center;
   color: #2c3e50;
 }
+body{
+  background-color: rgba($color: #B2AC88, $alpha: 1.0);
+  margin: 0;
+  padding: 0;
+}
 
 nav {
   padding: 30px;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #ffffff;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #ffffff;
     }
   }
 }
