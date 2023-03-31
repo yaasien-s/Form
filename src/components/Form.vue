@@ -3,7 +3,7 @@
 
     <div class="col-span-1">
 
-      <form class="rounded-3xl py-8 text-center" @submit.prevent="submitForm">
+      <form ref="form" class="rounded-3xl py-8 text-center" @submit.prevent="submitForm">
         <div class="space-y-6">
 
           <label for="name"></label>
@@ -21,7 +21,8 @@
           <label for="phone"></label>
           <input class=" rounded-lg px-6 py-2" type="tel" v-model="phone" id="phone" placeholder="Phone Number (+27)"
             required>
-          <span v-if="!valid"></span>
+          <br>
+          <span v-if="!valid">Enter Valid South African Phone number</span>
 
         </div>
         <div class="space-y-6">
@@ -31,7 +32,7 @@
             required></textarea>
         </div>
 
-        <button class="mt-6 bg-white h-10 rounded-lg" type="submit">Submit</button>
+        <button class="mt-6 bg-white h-10 rounded-lg" @click="resetForm" type="submit">Submit</button>
 
       </form>
 
@@ -139,11 +140,35 @@
     name: 'Form',
     props: {
       msg: String
-    }
-  }
+    },
+    data() {
+      return {
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+      };
+    },
+    computed: {
+      valid() {
+        const regex = /^((\+27)|0)[67]\d{8}$/;
+        return regex.test(this.phone);
+      },
+    },
+    methods: {
+      submitForm() {
+        if (!this.valid) {
+          return;
+        }
+
+      },
+      resetForm() {
+        this.$refs.form.reset();
+      }
+    },
+  };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   #container {
     // width: 90%;

@@ -12,7 +12,11 @@
   color: #2c3e50;
 }
 body{
-  background-color: rgba($color: #B2AC88, $alpha: 1.0);
+  background-image: url(./assets/bg/Web\ Page.png);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 0;
   padding: 0;
 }
