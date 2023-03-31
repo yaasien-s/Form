@@ -18,7 +18,11 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
-  padding: 0;
+  padding: 20px;
+
+  @media (max-width:1023px) {
+    background-position: right;
+  }
 }
 
 nav {

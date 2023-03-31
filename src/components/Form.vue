@@ -1,28 +1,32 @@
 <template>
-  <div id="container" class="grid grid-cols-3 ml-14 space-x-6">
+  <div id="container" class="grid lg:grid-cols-3 md:grid-cols-1 lg:ml-14 md:space-x-6 lg:space-y-0 sm:space-y-12">
 
+    <!-- Start of Form -->
     <div class="col-span-1">
-
-      <form ref="form" class="rounded-3xl py-8 text-center" @submit.prevent="submitForm">
+      <form ref="form" class="rounded-3xl py-8 text-center my-12 md:my-0" @submit.prevent="submitForm">
         <div class="space-y-6">
 
           <label for="name"></label>
           <input class=" rounded-lg px-6 py-2" type="text" v-model="name" id="name" placeholder="Name" required>
+          <div v-if="nameError" class="error">{{ nameError }}</div>
 
         </div>
         <div class="space-y-6">
 
           <label for="email"></label>
           <input class=" rounded-lg px-6 py-2" type="email" v-model="email" id="email" placeholder="Email" required>
+          <div v-if="emailError" class="error">{{ emailError }}</div>
 
         </div>
         <div class="space-y-6">
 
           <label for="phone"></label>
-          <input class=" rounded-lg px-6 py-2" type="tel" v-model="phone" id="phone" placeholder="Phone Number (+27)"
+          <input class=" rounded-lg px-6 py-2" type="tel" v-model="phone" id="phone" pattern="0[1-9]\d{8}" placeholder="Phone Number (+27)"
             required>
+            <div v-if="phoneError" class="error">{{ phoneError }}</div>
+
           <br>
-          <span v-if="!valid">Enter Valid South African Phone number</span>
+          <!-- <span v-if="!valid">Enter Valid S.A Phone number</span> -->
 
         </div>
         <div class="space-y-6">
@@ -30,22 +34,24 @@
           <label for="message"></label>
           <textarea class=" rounded-lg px-6 py-2 h-28" id="message" v-model="message" placeholder="Message"
             required></textarea>
+            <div v-if="messageError" class="error">{{ messageError }}</div>
         </div>
 
         <button class="mt-6 bg-white h-10 rounded-lg" @click="resetForm" type="submit">Submit</button>
 
       </form>
-
     </div>
+    <!-- End of Form -->
 
+    <!-- Start of Text Box -->
     <div id="text" class="col-span-2 p-12 bg-white bg-opacity-75 rounded-3xl space-y-8">
 
       <div class="space-y-6">
         <h2 class="text-4xl">Looking for me?</h2>
-        <p class="w-96">Trying to contact us? Feel free to fill out the form.
+        <p class="md:w-96">Trying to contact us? Feel free to fill out the form.
           If that is unsuccessful, then contact us directly:</p>
       </div>
-      <div class="grid grid-cols-2">
+      <div class="grid md:grid-cols-2 sm:grid-cols-1 space-y-6 md:space-y-0">
 
         <div class="space-y-6">
 
@@ -131,7 +137,7 @@
       </div>
 
     </div>
-
+    <!-- End of Text Box -->
   </div>
 </template>
 
@@ -147,39 +153,60 @@
         email: '',
         phone: '',
         message: '',
-      };
-    },
-    computed: {
-      valid() {
-        const regex = /^((\+27)|0)[67]\d{8}$/;
-        return regex.test(this.phone);
-      },
-    },
-    methods: {
-      submitForm() {
-        if (!this.valid) {
-          return;
-        }
-
-      },
-      resetForm() {
-        this.$refs.form.reset();
+        nameError: '',
+        emailError: '',
+        phoneError: '',
+        messageError: ''
       }
     },
+    methods: {
+      validateForm() {
+        this.nameError = this.name.length > 0 ? '' : 'Name is required'
+        this.emailError = /\S+@\S+\.\S+/.test(this.email) ? '' : 'Email is invalid'
+        this.phoneError = this.phone.length > 0 ? '' : 'Phone number is required'
+        this.messageError = this.message.length > 0 ? '' : 'Message is required'
+
+        return (
+          this.nameError === '' &&
+          this.emailError === '' &&
+          this.phoneError === '' &&
+          this.messageError === ''
+        )
+      },
+      submitForm() {
+        if (this.validateForm()) {
+          // Send form data to PHP script for processing
+          axios.post('/process_form.php', {
+            name: this.name,
+            email: this.email,
+            phone: this.phone,
+            message: this.message
+          });
+        }
+      }
+    }
   };
 </script>
 
 <style scoped lang="scss">
   #container {
-    // width: 90%;
     height: auto;
 
+    // Start of Form styling
     form {
       background-color: rgba($color: #FFDB58, $alpha: 1.0);
       width: 95%;
       margin-inline: auto;
       height: auto;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+      @media (max-width:1023px) {
+        width: 75%;
+      }
+
+      @media (max-width:767px) {
+        width: 370px;
+      }
 
       input,
       textarea {
@@ -209,6 +236,9 @@
       }
     }
 
+    // End of Form styling
+
+    // Start of Text Box styling
     #text {
       width: 80%;
       display: grid;
@@ -231,5 +261,7 @@
         color: #B2AC88;
       }
     }
+
+    // End of Text Box styling
   }
 </style>
