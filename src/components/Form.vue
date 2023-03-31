@@ -192,11 +192,17 @@
         //   });
         // }
 
+        console.log('Name:', this.name);
+        console.log('Email:', this.email);
+        console.log('Phone:', this.phone);
+        console.log('Message:', this.message);
+        this.submitted = true;
+
         this.name = '';
-        this.email = '';
-        this.phone = '';
-        this.message = '';
-        this.submitted = false;
+      this.email = '';
+      this.phone = '';
+      this.message = '';
+      this.submitted = false;
       },
     }
   };

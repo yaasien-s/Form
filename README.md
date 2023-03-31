@@ -48,6 +48,7 @@ each field is required and is validated. I went with a warm autumn look, to incr
 
 I attempted the bonus task, but I was unsuccessful.
 Due to my lack of knowledge on PHP I was unable to integrate PHP to Vue.js(VueX).
+Once the submit button is clicked, the data should display in the console.
 
 I tried hosting the website on Firebase but was unsuccessful due to configuration issues I was unable to figure out and find a solution.
 Therefore I hosted the website on Netlify.
