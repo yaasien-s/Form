@@ -1,16 +1,14 @@
 <template>
   <nav>
-    <router-link class="text-4xl" to="/">Contact Us</router-link>
+    <router-link class="font-semibold ml-10" to="/">Contact Us</router-link>
   </nav>
   <router-view/>
 </template>
 
 <style lang="scss">
+  @import url('https://fonts.googleapis.com/css2?family=Archivo&family=Poppins:wght@600&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
 }
 body{
@@ -23,9 +21,10 @@ nav {
   padding: 30px;
 
   a {
-    font-weight: bold;
     color: #ffffff;
-
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+    
     &.router-link-exact-active {
       color: #ffffff;
     }
