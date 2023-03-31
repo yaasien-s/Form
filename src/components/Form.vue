@@ -21,9 +21,9 @@
         <div class="space-y-6">
 
           <label for="phone"></label>
-          <input class=" rounded-lg px-6 py-2" type="tel" v-model="phone" id="phone" pattern="0[1-9]\d{8}" placeholder="Phone Number (+27)"
-            required>
-            <div v-if="phoneError" class="error">{{ phoneError }}</div>
+          <input class=" rounded-lg px-6 py-2" type="tel" v-model="phone" id="phone" pattern="0[1-9]\d{8}"
+            placeholder="Phone Number (+27)" required>
+          <div v-if="phoneError" class="error">{{ phoneError }}</div>
 
           <br>
           <!-- <span v-if="!valid">Enter Valid S.A Phone number</span> -->
@@ -34,10 +34,10 @@
           <label for="message"></label>
           <textarea class=" rounded-lg px-6 py-2 h-28" id="message" v-model="message" placeholder="Message"
             required></textarea>
-            <div v-if="messageError" class="error">{{ messageError }}</div>
+          <div v-if="messageError" class="error">{{ messageError }}</div>
         </div>
 
-        <button class="mt-6 bg-white h-10 rounded-lg" @click="resetForm" type="submit">Submit</button>
+        <button class="mt-6 bg-white h-10 rounded-lg" type="submit">Submit</button>
 
       </form>
     </div>
@@ -136,8 +136,15 @@
 
       </div>
 
+      <!-- <div v-if="submitted">
+        <h3>Thank you, {{ name }}!</h3>
+        <p>We'll contact you at {{ email }} or {{ phone }} ASAP.</p>
+        <p>Your message:</p>
+        <p>{{ message }}</p>
+      </div>
+    </div> -->
+      <!-- End of Text Box -->
     </div>
-    <!-- End of Text Box -->
   </div>
 </template>
 
@@ -156,7 +163,8 @@
         nameError: '',
         emailError: '',
         phoneError: '',
-        messageError: ''
+        messageError: '',
+        submitted: false
       }
     },
     methods: {
@@ -174,16 +182,22 @@
         )
       },
       submitForm() {
-        if (this.validateForm()) {
-          // Send form data to PHP script for processing
-          axios.post('/process_form.php', {
-            name: this.name,
-            email: this.email,
-            phone: this.phone,
-            message: this.message
-          });
-        }
-      }
+        // if (this.validateForm()) {
+        //   Send form data to PHP script for processing
+        //   axios.post('/process_form.php', {
+        //     name: this.name,
+        //     email: this.email,
+        //     phone: this.phone,
+        //     message: this.message
+        //   });
+        // }
+
+        this.name = '';
+        this.email = '';
+        this.phone = '';
+        this.message = '';
+        this.submitted = false;
+      },
     }
   };
 </script>
