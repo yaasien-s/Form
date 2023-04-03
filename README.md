@@ -43,6 +43,16 @@ On a page, display all user data entered into the database.
 
 ## Solution
 ```
+The way I went about this problem(project):
+1. I wrote down the tasks to understand what I was dealing with.
+2. I wireframed and designed what I wanted the form to look like.
+3. Began to build the foundation of the webpage, added everything to the form, and hosted on Netlify.
+4. Styled everything to how I designed(fonts, sizing, spacing, layout).
+5. Added the extra text to fill out page, made responsive.
+6. Started coding for the validation of the different fields.
+7. Attempted to integrate PHP and Vue.js(failed), added extra functions.
+8. Added README file.
+
 What was built was a form with 4 different inputs(name, email, phone number +27, and message),
 each field is required and is validated. I went with a warm autumn look, to increase the user experience.
 
