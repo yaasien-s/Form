@@ -221,7 +221,8 @@
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
       @media (max-width:1023px) {
-        width: 75%;
+        width: 80%;
+        
       }
 
       @media (max-width:767px) {
